@@ -1,0 +1,42 @@
+.Sidebar {
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+
+  justify-self: center;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+input[type="checkbox"] {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+.serverIcon {
+  background-color: #076678;
+  border-radius: 20px;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+
+  transition: border-radius 400ms;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.serverIcon:hover {
+  border-radius: 15px;
+}
+
+.serverIcon:hover .Wrapper {
+  height: 15px;
+}
+input[type="checkbox"]:checked + label .serverIcon {
+  border-radius: 15px;
+}
