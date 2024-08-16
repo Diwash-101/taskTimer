@@ -4,7 +4,6 @@ import Tasks from "./components/tasks";
 import FloatingWindow from "./components/floatingWindow";
 import BottomBar from "./components/bottomBar";
 import { useState } from "react";
-
 function App() {
   const [activeComponents, setActiveComponents] = useState([]);
 

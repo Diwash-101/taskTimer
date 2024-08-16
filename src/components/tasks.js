@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import ShowTask from "./showTodos";
+// import ReorderableList from "./reorderList";
 import "./tasks.css";
 
 export default function Tasks() {
@@ -14,25 +16,9 @@ export default function Tasks() {
     if (todo) {
       todo = { id: Date.now(), text: inputTask, group: project, isDone: false };
     }
-    if (inputTask.trim() !== "") {
-      setTodos([...todos, todo]);
-      // localStorage.setItem("todos", JSON.stringify(todos));
-      setInputTask("");
-    }
-  };
-  const deleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-  const getTodo = (id) => {
-    return todos.filter((todo) => todo.id === id);
+    setInputTask("");
   };
 
-  const handleComplete = (id) => {
-    let completedTodo = getTodo(id);
-    deleteTodo(id);
-    completedTodo[0].isDone = !completedTodo[0].isDone;
-    addTodo(completedTodo);
-  };
   function handleSubmit(event) {
     event.preventDefault();
     addTodo({
@@ -48,30 +34,9 @@ export default function Tasks() {
   //   setIsExpanded(todo.id);
   // };
 
-  const ShowTask = (todo) => {
-    return (
-      <li key={todo.id} className="todo-item">
-        <input
-          type="checkbox"
-          className="delete-button"
-          id={todo.id}
-          checked={todo.isDone}
-          onChange={(e) => handleComplete(e.target.id)}
-        />
-        <label htmlFor={todo.id}>
-          <div className="task">{todo.text}</div>
-
-          <button
-            onClick={() => deleteTodo(todo.id)}
-            className="delete-button"
-          ></button>
-        </label>
-      </li>
-    );
-  };
-
   return (
     <div className="todo-container">
+      {/* <ReorderableList items={todos}> */}
       <form className="add-container blur" onSubmit={(e) => handleSubmit(e)}>
         <div className="select-project">
           <select
@@ -103,9 +68,14 @@ export default function Tasks() {
         </div>
       </form>
 
-      <div className="todo-list blur hideScrollbar">
-        <ul>{todos.map((todo) => ShowTask(todo))}</ul>
+      <div className="todo-list blur hideScrollbar resize">
+        <ShowTask
+          todos={todos}
+          setTodos={setTodos}
+          onClick={(e) => e.stopPropagation()}
+        />
       </div>
+      {/* </ReorderableList> */}
     </div>
   );
 }

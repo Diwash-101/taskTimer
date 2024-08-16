@@ -111,3 +111,6 @@ input[type="checkbox"]:checked + label .task {
   height: 30px;
   right: 0;
 }
+.resize {
+  resize: both;
+}
